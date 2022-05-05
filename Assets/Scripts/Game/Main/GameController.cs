@@ -70,7 +70,6 @@ public class GameController : MonoBehaviour
     public void NextLevel()
     {
         levelManager.NextLevel();
-        GameObject.Find("Player").GetComponent<PlayerController>().Respawn();
     }
 
 }

@@ -64,12 +64,6 @@ public class PlayerController : MonoBehaviour
         //controller.Move(playerVelocity * Time.deltaTime);
     }
 
-    internal void Respawn()
-    {
-        rb.Sleep();
-        transform.position = new Vector3(0f, 1f, 0f);
-    }
-
     private void OnEnable()
     {
         playerInput.Enable();

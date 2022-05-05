@@ -10,8 +10,6 @@ public class StandardSpawner : SpawnerBase
     {
         string name = $"Maze{mazes.Count + 1}";
 
-
-        //GameObject maze = new GameObject(name);
         GameObject mazePrefab = Resources.Load<GameObject>("Prefabs/Maze");
         var maze = Instantiate(mazePrefab);
         maze.name = name;
@@ -39,5 +37,20 @@ public class StandardSpawner : SpawnerBase
         }
 
         return entityObjects;
+    }
+
+    public override GameObject SpawnPlayer(GameObject maze)
+    {
+        var player = GameObject.Find("Player");
+        var size = maze.GetComponent<MeshFilter>().sharedMesh.bounds.size;
+        player.GetComponent<Rigidbody>().Sleep();
+
+        player.transform.position = new Vector3
+            (
+                (int)Random.Range(0, size.x),
+                0.6f,
+                (int)Random.Range(0, -size.z)
+            );
+        return player;
     }
 }

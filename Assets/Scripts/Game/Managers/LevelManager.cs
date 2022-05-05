@@ -49,7 +49,7 @@ namespace Assets.Scripts.Game.Managers
 
             Levels = new List<Level>();
 
-            gameController.GameStarted += OnGameStareted;
+            gameController.GameStarted += OnGameStarted;
         }
 
         internal void NextLevel()
@@ -57,11 +57,14 @@ namespace Assets.Scripts.Game.Managers
             Levels[0].Dispose();
             Levels.RemoveAt(0);
             GenerateNewLevel();
+            Spawners[UnityEngine.Random.Range(0, Spawners.Count)].SpawnPlayer(Levels[0].Maze);
+            
         }
 
-        private void OnGameStareted()
+        private void OnGameStarted()
         {
             GenerateNewLevel();
+            Spawners[UnityEngine.Random.Range(0, Spawners.Count)].SpawnPlayer(Levels[0].Maze);
         }
 
         private void GenerateNewLevel()
