@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Game.EntityGenerators;
 using Assets.Scripts.Game.EntityGenerators.SinglePortalAtCorner;
+using Assets.Scripts.Game.EntityGenerators.SinglePortalAtRandom;
 using Assets.Scripts.Game.Levels;
 using Assets.Scripts.Game.MazeGenerators;
 using Assets.Scripts.Game.MazeGenerators.DFS;
@@ -43,7 +44,8 @@ namespace Assets.Scripts.Game.Managers
             if (gameController.useModelConstructor) MeshGenerators.Add(new ModelConstructorGenerator());
 
             EntityGenerators = new List<EntityGeneratorBase>();
-            if (gameController.usePortal) EntityGenerators.Add(new SinglePortalAtCornerEntityGenerator());
+            //if (gameController.usePortal) EntityGenerators.Add(new SinglePortalAtCornerEntityGenerator());
+            if (gameController.usePortal) EntityGenerators.Add(new SinglePortalAtRandomEntityGenerator());
 
             Levels = new List<Level>();
 
