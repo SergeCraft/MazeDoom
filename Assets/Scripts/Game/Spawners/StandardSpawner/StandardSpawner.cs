@@ -1,6 +1,10 @@
 using Assets.Scripts.Game.Entities;
+using Assets.Scripts.Game.Entities.Portal;
+using Assets.Scripts.Game.Levels;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class StandardSpawner : SpawnerBase
@@ -39,18 +43,22 @@ public class StandardSpawner : SpawnerBase
         return entityObjects;
     }
 
-    public override GameObject SpawnPlayer(GameObject maze)
+    public override GameObject SpawnPlayer(Level level)
     {
         var player = GameObject.Find("Player");
-        var size = maze.GetComponent<MeshFilter>().sharedMesh.bounds.size;
+        var portal = level.Entities.Find(x => x is PortalEntity);
+        var deadZoneSize = 5;
+
+        var deadZone = level.MazeDiescription.CellDescriptions.Where(x => 
+            (x.ColumnPosition - portal.PosX <= deadZoneSize & x.ColumnPosition - portal.PosX >= -deadZoneSize) &&
+            (x.RowPosition + portal.PosZ <= deadZoneSize & x.RowPosition + portal.PosZ >= -deadZoneSize)).ToList();
+        var spawnCell = level.MazeDiescription.CellDescriptions.Except(deadZone).OrderBy(x => Guid.NewGuid()).First();
+
+        var size = level.Maze.GetComponent<MeshFilter>().sharedMesh.bounds.size;
         player.GetComponent<Rigidbody>().Sleep();
 
-        player.transform.position = new Vector3
-            (
-                (int)Random.Range(0, size.x),
-                0.6f,
-                (int)Random.Range(0, -size.z)
-            );
+        player.transform.position = new Vector3(spawnCell.ColumnPosition, 0.6f, -spawnCell.RowPosition);
+
         return player;
     }
 }

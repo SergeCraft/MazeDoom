@@ -44,7 +44,6 @@ namespace Assets.Scripts.Game.Managers
             if (gameController.useModelConstructor) MeshGenerators.Add(new ModelConstructorGenerator());
 
             EntityGenerators = new List<EntityGeneratorBase>();
-            //if (gameController.usePortal) EntityGenerators.Add(new SinglePortalAtCornerEntityGenerator());
             if (gameController.usePortal) EntityGenerators.Add(new SinglePortalAtRandomEntityGenerator());
 
             Levels = new List<Level>();
@@ -57,14 +56,14 @@ namespace Assets.Scripts.Game.Managers
             Levels[0].Dispose();
             Levels.RemoveAt(0);
             GenerateNewLevel();
-            Spawners[UnityEngine.Random.Range(0, Spawners.Count)].SpawnPlayer(Levels[0].Maze);
+            Spawners[UnityEngine.Random.Range(0, Spawners.Count)].SpawnPlayer(Levels[0]);
             
         }
 
         private void OnGameStarted()
         {
             GenerateNewLevel();
-            Spawners[UnityEngine.Random.Range(0, Spawners.Count)].SpawnPlayer(Levels[0].Maze);
+            Spawners[UnityEngine.Random.Range(0, Spawners.Count)].SpawnPlayer(Levels[0]);
         }
 
         private void GenerateNewLevel()
@@ -76,6 +75,7 @@ namespace Assets.Scripts.Game.Managers
             var spawner = Spawners[rdm.Next(0, Spawners.Count)];
             level.Maze = spawner.SpawnMaze(mesh);
             level.Entities = EntityGenerators[rdm.Next(0, EntityGenerators.Count)].GenerateEntitiesForMaze(descr);
+            level.MazeDiescription = descr;
             spawner.SpawnEntities(level.Entities, level.Maze);
 
             Levels.Add(level);
