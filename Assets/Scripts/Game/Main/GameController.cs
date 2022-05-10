@@ -33,8 +33,8 @@ public class GameController : MonoBehaviour
     public bool usePortal = true;
 
     // player types
-    public bool ballDefault = true;
-    public bool ballTiltControlled = true;
+    public bool useBallDefault = true;
+    public bool useBallTiltControlled = false;
 
 
     /// <summary>
@@ -49,6 +49,7 @@ public class GameController : MonoBehaviour
     /// </summary>
     private ConfigManager configManager;
     private LevelManager levelManager;
+    private PlayerManager playerManager;
 
     private void Awake()
     {
@@ -58,6 +59,8 @@ public class GameController : MonoBehaviour
             configManager.LoadConfigFromPlayerPerfs();
 
             levelManager = new LevelManager();
+
+            playerManager = new PlayerManager();
         }
         catch (Exception ex)
         {
