@@ -32,6 +32,10 @@ public class GameController : MonoBehaviour
     // entities
     public bool usePortal = true;
 
+    // player types
+    public bool ballDefault = true;
+    public bool ballTiltControlled = true;
+
 
     /// <summary>
     /// Events
