@@ -19,7 +19,7 @@ namespace Assets.Scripts.Game.EntityGenerators.SinglePortalAtRandom
             { new PortalEntity(
                 (int) UnityEngine.Random.Range(0, maze.ColumnCount - 1),
                 (int) UnityEngine.Random.Range(0, -maze.RowCount + 1),
-                0.6f,
+                0.3f,
                 GameObject.Find("Mazes").transform)};
 
             return entities;

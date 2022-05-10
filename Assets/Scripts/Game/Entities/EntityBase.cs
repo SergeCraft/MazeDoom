@@ -15,7 +15,7 @@ namespace Assets.Scripts.Game.Entities
         public float PosY;
         public float PosZ;
 
-        public EntityBase(float posX, float posZ, Transform parent, float posY = 0.5f)
+        public EntityBase(float posX, float posZ, Transform parent, float posY = 0.25f)
         {
             PosX = posX;
             PosY = posY;
