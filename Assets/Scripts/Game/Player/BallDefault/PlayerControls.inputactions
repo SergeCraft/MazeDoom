@@ -81,61 +81,6 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "Gyroscope",
-                    "id": "43e6239d-8902-4793-8afa-e5d3e8d472ed",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "90204595-1374-493f-869a-ef140ff37e59",
-                    "path": "<Gyroscope>/angularVelocity/y",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "1207a948-85e5-4a8e-83f5-d53f8c70193f",
-                    "path": "<Gyroscope>/angularVelocity/y",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "97c02d28-88d8-49e5-a55f-ea1f0890e404",
-                    "path": "<Gyroscope>/angularVelocity/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "e550f914-510b-4b97-8ea8-c861de1063cf",
-                    "path": "<Gyroscope>/angularVelocity/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 }
             ]
         }

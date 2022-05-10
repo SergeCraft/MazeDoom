@@ -12,10 +12,6 @@ public class PlayerController : MonoBehaviour
     protected CharacterController controller;
     protected PlayerControls playerInput;
     protected Rigidbody rb;
-    private Vector3 playerVelocity;
-    private bool groundedPlayer;
-    private Text console;
-    private UnityEngine.InputSystem.Gyroscope gyroscope;
 
     private void Awake()
     {
