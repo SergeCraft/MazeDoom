@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Game.Config;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +21,7 @@ namespace Assets.Scripts.Game.Managers
         {
             try
             {
-
-                PlayerPrefs.SetString("Config", JsonUtility.ToJson(Config));
-                PlayerPrefs.Save();
+                PlayerPrefs.SetString("Config", JsonConvert.SerializeObject(Config));
                 return true;
             }
             catch
@@ -35,11 +34,16 @@ namespace Assets.Scripts.Game.Managers
         {
             try
             {
-                Config = JsonUtility.FromJson<GameConfig>(PlayerPrefs.GetString("Config"));
-                if (Config == null)
+                var cfg = JsonConvert.DeserializeObject<GameConfig>(PlayerPrefs.GetString("Config"));
+
+                if (cfg == null)
                 {
                     Debug.Log("Config load failre. Using default config");
                     Config = GetDefaultConfig();
+                }
+                else
+                {
+                    Config = cfg;
                 }
                 return true;
             }
