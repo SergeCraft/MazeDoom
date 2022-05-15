@@ -18,7 +18,6 @@ namespace Assets.Scripts.Game.MazeGenerators.DFS
             Random random = new Random();
             var currentCell = maze.CellDescriptions.Find(x => x.ColumnPosition == 0 && x.RowPosition == 0);
             List<CellDescription> visitedCells = new List<CellDescription>();
-            Stack<CellDescription> cellStack = new Stack<CellDescription>();
 
             while (visitedCells.Count < maze.CellDescriptions.Count - 1)
             {
@@ -66,13 +65,19 @@ namespace Assets.Scripts.Game.MazeGenerators.DFS
                             throw new Exception("DFS generator failure: undefined direction");
                     }
 
-                    cellStack.Push(currentCell);
                     visitedCells.Add(currentCell);
                     currentCell = nextCell;
                 }
                 else
                 {
-                    currentCell = cellStack.Pop();
+                    var potentialNewBranchStart = visitedCells.Where(x =>
+                    maze.CellDescriptions.Where(y =>
+                        (y.ColumnPosition == x.ColumnPosition & y.RowPosition == x.RowPosition - 1 & y.Type == CellTypes.All) ||
+                        (y.ColumnPosition == x.ColumnPosition & y.RowPosition == x.RowPosition + 1 & y.Type == CellTypes.All) ||
+                        (y.ColumnPosition == x.ColumnPosition - 1 & y.RowPosition == x.RowPosition & y.Type == CellTypes.All) ||
+                        (y.ColumnPosition == x.ColumnPosition + 1& y.RowPosition == x.RowPosition & y.Type == CellTypes.All))
+                            .Count() > 0).OrderBy(g => Guid.NewGuid()).ToList();
+                    currentCell = potentialNewBranchStart.First();
                 }
                 
             }

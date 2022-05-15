@@ -63,7 +63,7 @@ namespace Assets.Scripts.Game.MeshGenerators
                 //})
                 //.ToArray();
 
-                //Debug cell info
+                // Debug cell info
                 //foreach (var cell in descr.CellDescriptions)
                 //{
                 //    GameObject index = new GameObject("CellID");
