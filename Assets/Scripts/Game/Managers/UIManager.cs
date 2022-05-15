@@ -27,6 +27,8 @@ namespace Assets.Scripts.Game.Managers
                 .AddListener(() => gameController.playerManager.SetPlayerMode(PlayerControllerModes.BallTiltControl));
             GameObject.Find("SwitchJoystickModeButton").GetComponent<Button>().onClick
                 .AddListener(() => gameController.playerManager.SetPlayerMode(PlayerControllerModes.BallJoystickControl));
+            GameObject.Find("QuitButton").GetComponent<Button>().onClick
+                .AddListener(() => gameController.Quit());
         }
 
 

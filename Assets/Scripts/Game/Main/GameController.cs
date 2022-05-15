@@ -81,6 +81,11 @@ public class GameController : MonoBehaviour
         levelManager.NextLevel();
     }
 
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
 }
 
 public delegate void GameStarted();

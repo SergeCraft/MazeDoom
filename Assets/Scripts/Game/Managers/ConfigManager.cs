@@ -22,6 +22,7 @@ namespace Assets.Scripts.Game.Managers
             {
 
                 PlayerPrefs.SetString("Config", JsonUtility.ToJson(Config));
+                PlayerPrefs.Save();
                 return true;
             }
             catch
