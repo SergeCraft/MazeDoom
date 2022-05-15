@@ -842,7 +842,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugMode: 0
   useHardcodeMazeGenerator: 0
-  useDFSMazeGenerator: 0
+  useDFSMazeGenerator: 1
   useSergeCraftMazeGenerator: 1
   useModelConstructor: 1
   useStandardSpawner: 1
