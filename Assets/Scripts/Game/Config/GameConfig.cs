@@ -10,6 +10,8 @@ namespace Assets.Scripts.Game.Config
 {
     public class GameConfig
     {
-        public PlayerControllerModes PlayerMode { get; set; } = PlayerControllerModes.BallJoystickControl;
+        public PlayerControllerModes PlayerMode = PlayerControllerModes.BallJoystickControl;
+
+        public int MazeCompletedCount = 0;
     }
 }

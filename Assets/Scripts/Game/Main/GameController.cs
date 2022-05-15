@@ -73,12 +73,16 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+        uiManager.UpdateMazesCompletedCount(configManager.Config.MazeCompletedCount);
         GameStarted?.Invoke();
     }
 
     public void NextLevel()
     {
         levelManager.NextLevel();
+        configManager.Config.MazeCompletedCount++;
+        configManager.SaveConfigToPlayerPerfs();
+        uiManager.UpdateMazesCompletedCount(configManager.Config.MazeCompletedCount);
     }
 
     public void Quit()
