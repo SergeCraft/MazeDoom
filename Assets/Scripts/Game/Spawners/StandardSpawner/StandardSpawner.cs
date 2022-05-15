@@ -15,7 +15,7 @@ public class StandardSpawner : SpawnerBase
         string name = $"Maze{mazes.Count + 1}";
 
         GameObject mazePrefab = Resources.Load<GameObject>("Prefabs/Maze");
-        var maze = Instantiate(mazePrefab);
+        var maze = GameObject.Instantiate(mazePrefab);
         maze.name = name;
         maze.transform.SetParent(GameObject.Find("Mazes").transform);
         maze.GetComponent<MeshFilter>().mesh = mazeMesh;

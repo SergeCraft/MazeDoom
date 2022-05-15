@@ -1,9 +1,6 @@
+using Assets.Scripts.Game.Config;
 using Assets.Scripts.Game.Managers;
-using Assets.Scripts.Game.Maze;
-using Assets.Scripts.Game.MazeGenerators;
-using Assets.Scripts.Game.MazeGenerators.DFS;
-using Assets.Scripts.Game.MazeGenerators.Hardcode;
-using Assets.Scripts.Game.MeshGenerators;
+using Assets.Scripts.Game.Player;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -42,14 +39,16 @@ public class GameController : MonoBehaviour
     /// </summary>
 
     public event GameStarted GameStarted;
+    public event PlayerModeChanged PlayerModeChanged;
 
 
     /// <summary>
     /// Managers
     /// </summary>
-    private ConfigManager configManager;
-    private LevelManager levelManager;
-    private PlayerManager playerManager;
+    public ConfigManager configManager;
+    public LevelManager levelManager;
+    public PlayerManager playerManager;
+    public UIManager uiManager;
 
     private void Awake()
     {
@@ -60,7 +59,10 @@ public class GameController : MonoBehaviour
 
             levelManager = new LevelManager();
 
+            uiManager = new UIManager();
+
             playerManager = new PlayerManager();
+            playerManager.ModeChanged += uiManager.SetMode;
         }
         catch (Exception ex)
         {
@@ -82,3 +84,5 @@ public class GameController : MonoBehaviour
 }
 
 public delegate void GameStarted();
+public delegate void PlayerModeChanged(PlayerControllerModes mode);
+public delegate void GameConfigChanged(GameConfig config);

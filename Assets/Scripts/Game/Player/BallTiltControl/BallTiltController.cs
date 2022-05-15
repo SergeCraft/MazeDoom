@@ -5,11 +5,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class PlayerTiltController : MonoBehaviour
+public class BallTiltController : MonoBehaviour
 {
 
 
     protected Rigidbody rb;
+    private GameObject uiGroup;
 
     // accelerometer settings
 
@@ -21,12 +22,12 @@ public class PlayerTiltController : MonoBehaviour
 
     private float tiltAnchorY = -0.6f;
 
-    private Text valueDisplay;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        //valueDisplay = GameObject.Find("TiltMoveValueDisplay").GetComponent<Text>();
+        //uiGroup = GameObject.Find("TiltControl");
+        //uiGroup.SetActive(true);
     }
 
     private void Start()
@@ -40,8 +41,6 @@ public class PlayerTiltController : MonoBehaviour
         lowPassValue = LowPassFilterAccelerometer(lowPassValue);
 
         Vector3 move = new Vector3(lowPassValue.x, 0, lowPassValue.y - tiltAnchorY);
-
-        //valueDisplay.text = move.ToString();
 
         if (move != Vector3.zero)
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Game.Player;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,6 @@ namespace Assets.Scripts.Game.Config
 {
     public class GameConfig
     {
-        public string SomeProp { get; set; }
+        public PlayerControllerModes PlayerMode { get; set; } = PlayerControllerModes.BallJoystickControl;
     }
 }
