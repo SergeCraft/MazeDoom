@@ -692,7 +692,7 @@ GameObject:
   - component: {fileID: 726645198}
   - component: {fileID: 726645197}
   m_Layer: 5
-  m_Name: Button
+  m_Name: SetNormalButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

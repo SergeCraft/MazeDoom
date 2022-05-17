@@ -26,8 +26,6 @@ public class BallTiltController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        //uiGroup = GameObject.Find("TiltControl");
-        //uiGroup.SetActive(true);
     }
 
     private void Start()

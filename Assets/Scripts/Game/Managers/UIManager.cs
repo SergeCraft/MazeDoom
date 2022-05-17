@@ -33,6 +33,8 @@ namespace Assets.Scripts.Game.Managers
                 .AddListener(() => gameController.playerManager.SetPlayerMode(PlayerControllerModes.BallJoystickControl));
             GameObject.Find("QuitButton").GetComponent<Button>().onClick
                 .AddListener(() => gameController.Quit());
+            GameObject.Find("SetNormalButton").GetComponent<Button>().onClick
+                .AddListener(() => gameController.playerManager.BallTiltControlSetAnchors());
         }
 
 

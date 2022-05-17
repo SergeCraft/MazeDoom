@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.Game.Managers
 {
@@ -35,11 +36,13 @@ namespace Assets.Scripts.Game.Managers
                 case PlayerControllerModes.BallJoystickControl:
                     playerGO.GetComponent<BallTiltController>().enabled = false;
                     playerGO.GetComponent<BallJoystickController>().enabled = true;
+
                     break;
 
                 case PlayerControllerModes.BallTiltControl:
                     playerGO.GetComponent<BallJoystickController>().enabled = false;
                     playerGO.GetComponent<BallTiltController>().enabled = true;
+
                     break;
             };
 
@@ -48,6 +51,11 @@ namespace Assets.Scripts.Game.Managers
             gameController.configManager.SaveConfigToPlayerPerfs();
 
             ModeChanged?.Invoke(mode);
+        }
+
+        internal void BallTiltControlSetAnchors()
+        {
+            playerGO.GetComponent<BallTiltController>().SetupAnchors();
         }
 
         public void SetPlayerMode(PlayerControllerModes newMode)
