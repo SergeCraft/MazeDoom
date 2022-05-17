@@ -30,7 +30,7 @@ public class BallTiltController : MonoBehaviour
     private Vector3 lowPassValue = Vector3.zero;
 
     // speed limit
-    private float maxSpeed = 3.0f;
+    private float maxSpeed = 5.0f;
 
     // events
     public event AutoSetupStateChanged autoSetupStateChanged;
