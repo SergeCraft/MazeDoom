@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Game.Player;
+using Assets.Scripts.Game.UI.BallTiltControl;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,15 +27,17 @@ namespace Assets.Scripts.Game.Managers
             uiMainElements = GameObject.FindGameObjectsWithTag("UIMain").ToList();
             uiPlayerControlElements = GameObject.FindGameObjectsWithTag("UIPalyerControl").ToList();
 
-            //subscribing to UI events
+            // subscribing to UI events
             GameObject.Find("SwitchTiltModeButton").GetComponent<Button>().onClick
                 .AddListener(() => gameController.playerManager.SetPlayerMode(PlayerControllerModes.BallTiltControl));
             GameObject.Find("SwitchJoystickModeButton").GetComponent<Button>().onClick
                 .AddListener(() => gameController.playerManager.SetPlayerMode(PlayerControllerModes.BallJoystickControl));
             GameObject.Find("QuitButton").GetComponent<Button>().onClick
                 .AddListener(() => gameController.Quit());
-            GameObject.Find("SetNormalButton").GetComponent<Button>().onClick
-                .AddListener(() => gameController.playerManager.BallTiltControlSetAnchors());
+
+            // subscribing UI elements to game events
+            GameObject.Find("Player").GetComponent<BallTiltController>().autoSetupStateChanged +=
+            GameObject.Find("SwitchJoystickModeButton").GetComponent<SwitchJoystickModeButtonController>().OnAutoSetupStateChanged;
         }
 
 

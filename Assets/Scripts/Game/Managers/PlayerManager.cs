@@ -53,10 +53,6 @@ namespace Assets.Scripts.Game.Managers
             ModeChanged?.Invoke(mode);
         }
 
-        internal void BallTiltControlSetAnchors()
-        {
-            playerGO.GetComponent<BallTiltController>().SetupAnchors();
-        }
 
         public void SetPlayerMode(PlayerControllerModes newMode)
         {
