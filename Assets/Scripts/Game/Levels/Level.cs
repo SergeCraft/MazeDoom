@@ -15,11 +15,13 @@ namespace Assets.Scripts.Game.Levels
 
         public MazeDescription MazeDiescription { get; set; }
 
-        public GameObject Maze { get; set; }
+        public GameObject MazeWalls { get; set; }
+        public GameObject MazeFloor { get; set; }
 
         internal void Dispose()
         {
-            GameObject.Destroy(Maze);
+            GameObject.Destroy(MazeWalls);
+            GameObject.Destroy(MazeFloor);
         }
     }
 }

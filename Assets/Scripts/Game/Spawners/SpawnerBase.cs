@@ -8,7 +8,7 @@ public abstract class SpawnerBase
 {
     public List<GameObject> mazes = new List<GameObject>();
 
-    public abstract GameObject SpawnMaze(Mesh mazeMesh);
+    public abstract (GameObject, GameObject) SpawnMaze(Mesh wallsMesh, Mesh floorMesh);
     public abstract List<GameObject> SpawnEntities(List<EntityBase> entities, GameObject maze);
     public abstract GameObject SpawnPlayer(Level maze);
 }

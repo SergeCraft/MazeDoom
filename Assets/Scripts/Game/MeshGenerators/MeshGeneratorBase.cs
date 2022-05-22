@@ -10,6 +10,6 @@ namespace Assets.Scripts.Game.MeshGenerators
 {
     public abstract class MeshGeneratorBase
     {
-        public abstract Mesh GenerateMesh(MazeDescription description);
+        public abstract (Mesh, Mesh) GenerateMesh(MazeDescription description);
     }
 }

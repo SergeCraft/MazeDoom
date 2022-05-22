@@ -10,20 +10,30 @@ using UnityEngine;
 public class StandardSpawner : SpawnerBase
 {
 
-    public override GameObject SpawnMaze(Mesh mazeMesh)
+    public override (GameObject, GameObject) SpawnMaze(Mesh wallsMesh, Mesh floorMesh)
     {
         string name = $"Maze{mazes.Count + 1}";
 
-        GameObject mazePrefab = Resources.Load<GameObject>("Prefabs/Maze");
-        var maze = GameObject.Instantiate(mazePrefab);
-        maze.name = name;
-        maze.transform.SetParent(GameObject.Find("Mazes").transform);
-        maze.GetComponent<MeshFilter>().mesh = mazeMesh;
-        maze.GetComponent<MeshCollider>().sharedMesh = mazeMesh;
-        maze.GetComponent<MeshRenderer>().material.color = UnityEngine.Random.ColorHSV();
+        GameObject mazePrefab = Resources.Load<GameObject>("Prefabs/CellComponents/MazeWalls");
+        var mazeWalls = GameObject.Instantiate(mazePrefab);
+        mazeWalls.name = name;
+        mazeWalls.transform.SetParent(GameObject.Find("Mazes").transform);
+        mazeWalls.GetComponent<MeshFilter>().mesh = wallsMesh;
+        mazeWalls.GetComponent<MeshCollider>().sharedMesh = wallsMesh;
+        mazeWalls.GetComponent<MeshRenderer>().material.color = UnityEngine.Random.ColorHSV();
 
-        mazes.Add(maze);
-        return maze;
+        GameObject mazeFloorPrefab = Resources.Load<GameObject>("Prefabs/CellComponents/MazeFloor");
+        var mazeFloor = GameObject.Instantiate(mazePrefab);
+        mazeFloor.name = name + ".Floor";
+        mazeFloor.transform.SetParent(mazeWalls.transform);
+        mazeFloor.GetComponent<MeshRenderer>().material.color = UnityEngine.Random.ColorHSV();
+        mazeFloor.GetComponent<MeshFilter>().sharedMesh = floorMesh;
+        mazeFloor.GetComponent<MeshCollider>().sharedMesh = floorMesh;
+        //mazeFloor.transform.localScale = new Vector3(wallsMesh.bounds.size.x, 1.0f, wallsMesh.bounds.size.z);
+        //mazeFloor.transform.position = new Vector3(wallsMesh.bounds.center.x, -1.05f, wallsMesh.bounds.center.z);
+
+        mazes.Add(mazeWalls);
+        return (mazeWalls, mazeFloor);
     }
 
 
@@ -54,7 +64,7 @@ public class StandardSpawner : SpawnerBase
             (x.RowPosition + portal.PosZ <= deadZoneSize & x.RowPosition + portal.PosZ >= -deadZoneSize)).ToList();
         var spawnCell = level.MazeDiescription.CellDescriptions.Except(deadZone).OrderBy(x => Guid.NewGuid()).First();
 
-        var size = level.Maze.GetComponent<MeshFilter>().sharedMesh.bounds.size;
+        var size = level.MazeWalls.GetComponent<MeshFilter>().sharedMesh.bounds.size;
         player.GetComponent<Rigidbody>().Sleep();
 
         player.transform.position = new Vector3(spawnCell.ColumnPosition, 0.6f, -spawnCell.RowPosition);
