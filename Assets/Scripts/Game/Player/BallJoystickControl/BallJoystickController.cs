@@ -15,24 +15,30 @@ public class BallJoystickController : MonoBehaviour
 
     private float maxSpeed = 5.0f;
 
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         playerInput = new PlayerControls();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         Vector2 movement = playerInput.DefaultMap.Move.ReadValue<Vector2>();
         Vector3 move = new Vector3(movement.x, 0, movement.y);
-        
+
 
         if (move != Vector3.zero && rb.velocity.sqrMagnitude <= maxSpeed)
         {
             rb.AddForce(move * 10);
         }
+    }
+
+    private void Update()
+    {
 
     }
+
 
     private void OnEnable()
     {
@@ -42,6 +48,11 @@ public class BallJoystickController : MonoBehaviour
     private void OnDisable()
     {
         playerInput.Disable();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        
     }
 
 }
