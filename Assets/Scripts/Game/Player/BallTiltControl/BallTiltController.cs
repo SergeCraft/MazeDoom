@@ -14,7 +14,9 @@ public class BallTiltController : MonoBehaviour
     private GameObject uiGroup;
     private GameObject uiSwitchJoystickModeButton;
 
-    
+    private PlayerSparksController playerSparksController;
+
+
     // Auto setting up anchors settings    
 
     private float tiltAnchorY = -0.6f;
@@ -39,6 +41,7 @@ public class BallTiltController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         uiGroup = GameObject.Find("BallTiltControl");
+        playerSparksController = GetComponentInChildren<PlayerSparksController>();
         uiSwitchJoystickModeButton = GameObject.Find("SwitchJoystickModeButton");
         GameObject.Find("GameController").GetComponent<GameController>().playerManager.ModeChanged 
             += OnModeChanged;
@@ -96,6 +99,15 @@ public class BallTiltController : MonoBehaviour
     {
         Vector3 newValue = Vector3.Lerp(prevValue, Input.acceleration, lowPassFilterFactor);
         return newValue;
+    }
+
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (!collision.other.name.Contains("Floor"))
+        {
+            playerSparksController.BurstAtCollision(collision);
+        }
     }
 
 }

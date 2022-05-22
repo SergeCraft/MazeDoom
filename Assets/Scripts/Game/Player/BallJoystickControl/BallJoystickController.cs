@@ -13,6 +13,8 @@ public class BallJoystickController : MonoBehaviour
     protected PlayerControls playerInput;
     protected Rigidbody rb;
 
+    private PlayerSparksController playerSparksController;
+
     private float maxSpeed = 5.0f;
 
 
@@ -20,6 +22,7 @@ public class BallJoystickController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         playerInput = new PlayerControls();
+        playerSparksController = GetComponentInChildren<PlayerSparksController>();
     }
 
     private void FixedUpdate()
@@ -50,9 +53,12 @@ public class BallJoystickController : MonoBehaviour
         playerInput.Disable();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void OnCollisionEnter(Collision collision)
     {
-        
+        if (!collision.other.name.Contains("Floor"))
+        {
+            playerSparksController.BurstAtCollision(collision);
+        }
     }
 
 }
