@@ -83,11 +83,11 @@ namespace Assets.Scripts.Game.MeshGenerators.ModelConstructor
                             {
                     new Vector3(-0.5f, 0, 0.5f),
                     new Vector3(descr.ColumnCount - 0.5f, 0, 0.5f),
-                    new Vector3(descr.ColumnCount - 1, 0, -descr.RowCount + 0.5f),
+                    new Vector3(descr.ColumnCount - 0.5f, 0, -descr.RowCount + 0.5f),
                     new Vector3(-0.5f, 0, -descr.RowCount + 0.5f),
                     new Vector3(-0.5f, -0.1f, 0.5f),
                     new Vector3(descr.ColumnCount - 0.5f, -0.1f, 0.5f),
-                    new Vector3(descr.ColumnCount - 1, -0.1f, -descr.RowCount + 0.5f),
+                    new Vector3(descr.ColumnCount - 0.5f, -0.1f, -descr.RowCount + 0.5f),
                     new Vector3(-0.5f, -0.1f, -descr.RowCount + 0.5f)
                             };
             floorMesh.triangles = new int[36]
