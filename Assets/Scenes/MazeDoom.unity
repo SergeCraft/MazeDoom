@@ -5380,7 +5380,8 @@ MonoBehaviour:
   useHardcodeMazeGenerator: 0
   useDFSMazeGenerator: 1
   useSergeCraftMazeGenerator: 0
-  useModelConstructor: 1
+  useModelConstructor: 0
+  useCityModelConstructor: 1
   useStandardSpawner: 1
   usePortal: 1
   useBallDefault: 1

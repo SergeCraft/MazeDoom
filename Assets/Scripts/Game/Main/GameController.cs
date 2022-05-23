@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour
 
     // mesh generators
     public bool useModelConstructor = true;
+    public bool useCityModelConstructor = true;
 
     // spawners
     public bool useStandardSpawner = true;

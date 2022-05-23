@@ -43,6 +43,7 @@ namespace Assets.Scripts.Game.Managers
 
             MeshGenerators = new List<MeshGeneratorBase>();
             if (gameController.useModelConstructor) MeshGenerators.Add(new ModelConstructorGenerator());
+            if (gameController.useCityModelConstructor) MeshGenerators.Add(new CityModelConstructorGenerator());
 
             EntityGenerators = new List<EntityGeneratorBase>();
             if (gameController.usePortal) EntityGenerators.Add(new SinglePortalAtRandomEntityGenerator());
