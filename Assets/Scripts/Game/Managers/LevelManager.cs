@@ -8,6 +8,8 @@ using Assets.Scripts.Game.MazeGenerators.Hardcode;
 using Assets.Scripts.Game.MazeGenerators.SergeCraft;
 using Assets.Scripts.Game.MeshGenerators;
 using Assets.Scripts.Game.MeshGenerators.ModelConstructor;
+using Assets.Scripts.Game.MeshGenerators.MultiObjectModelConstructor;
+using Assets.Scripts.Game.Spawners.MultiObjectSpawner;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,10 +42,12 @@ namespace Assets.Scripts.Game.Managers
 
             Spawners = new List<SpawnerBase>();
             if (gameController.useStandardSpawner) Spawners.Add(new StandardSpawner());
+            if (gameController.useMultiobjectSpawner) Spawners.Add(new MultiObjectSpawner());
 
             MeshGenerators = new List<MeshGeneratorBase>();
             if (gameController.useModelConstructor) MeshGenerators.Add(new ModelConstructorGenerator());
             if (gameController.useCityModelConstructor) MeshGenerators.Add(new CityModelConstructorGenerator());
+            if (gameController.useMultiobjectModelConstructor) MeshGenerators.Add(new CityMultiObjectModelConstructorGenerator());
 
             EntityGenerators = new List<EntityGeneratorBase>();
             if (gameController.usePortal) EntityGenerators.Add(new SinglePortalAtRandomEntityGenerator());
@@ -71,15 +75,15 @@ namespace Assets.Scripts.Game.Managers
         private void GenerateNewLevel()
         {
             var rdm = new System.Random();
-            var descr = MazeGenerators[rdm.Next(0, MazeGenerators.Count)].GenerateMaze(rdm.Next(14, 14), rdm.Next(14, 14));
-            Mesh wallsMesh = new Mesh();
-            Mesh floorMesh = new Mesh();
-           (wallsMesh, floorMesh) = MeshGenerators[rdm.Next(0, MeshGenerators.Count)].GenerateMesh(descr);
+            var descr = MazeGenerators[rdm.Next(0, MazeGenerators.Count)].GenerateMaze(rdm.Next(10, 30), rdm.Next(10, 30));
+            List<Mesh> wallsMesh = new List<Mesh>();
+            List<Mesh> floorMesh = new List<Mesh>();
+            (wallsMesh, floorMesh) = MeshGenerators[rdm.Next(0, MeshGenerators.Count)].GenerateMesh(descr);
             var level = new Level();
             var spawner = Spawners[rdm.Next(0, Spawners.Count)];
-            (level.MazeWalls, level.MazeFloor) = spawner.SpawnMaze(wallsMesh, floorMesh);
             level.Entities = EntityGenerators[rdm.Next(0, EntityGenerators.Count)].GenerateEntitiesForMaze(descr);
             level.MazeDiescription = descr;
+            (level.MazeWalls, level.MazeFloor) = spawner.SpawnMaze(wallsMesh, floorMesh, level);
             spawner.SpawnEntities(level.Entities, level.MazeWalls);
 
             Levels.Add(level);

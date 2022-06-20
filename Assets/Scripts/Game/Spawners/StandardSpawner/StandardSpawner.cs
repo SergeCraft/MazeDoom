@@ -10,7 +10,7 @@ using UnityEngine;
 public class StandardSpawner : SpawnerBase
 {
 
-    public override (GameObject, GameObject) SpawnMaze(Mesh wallsMesh, Mesh floorMesh)
+    public override (GameObject, GameObject) SpawnMaze(List<Mesh> wallsMesh, List<Mesh> floorMesh, Level level)
     {
         string name = $"Maze{mazes.Count + 1}";
 
@@ -18,8 +18,8 @@ public class StandardSpawner : SpawnerBase
         var mazeWalls = GameObject.Instantiate(mazePrefab);
         mazeWalls.name = name;
         mazeWalls.transform.SetParent(GameObject.Find("Mazes").transform);
-        mazeWalls.GetComponent<MeshFilter>().mesh = wallsMesh;
-        mazeWalls.GetComponent<MeshCollider>().sharedMesh = wallsMesh;
+        mazeWalls.GetComponent<MeshFilter>().mesh = wallsMesh[0];
+        mazeWalls.GetComponent<MeshCollider>().sharedMesh = wallsMesh[0];
         mazeWalls.GetComponent<MeshRenderer>().material.color = UnityEngine.Random.ColorHSV();
 
         GameObject mazeFloorPrefab = Resources.Load<GameObject>("Prefabs/CellComponents/MazeFloor");
@@ -27,8 +27,8 @@ public class StandardSpawner : SpawnerBase
         mazeFloor.name = name + ".Floor";
         mazeFloor.transform.SetParent(mazeWalls.transform);
         mazeFloor.GetComponent<MeshRenderer>().material.color = UnityEngine.Random.ColorHSV();
-        mazeFloor.GetComponent<MeshFilter>().sharedMesh = floorMesh;
-        mazeFloor.GetComponent<MeshCollider>().sharedMesh = floorMesh;
+        mazeFloor.GetComponent<MeshFilter>().sharedMesh = floorMesh[0];
+        mazeFloor.GetComponent<MeshCollider>().sharedMesh = floorMesh[0];
         //mazeFloor.transform.localScale = new Vector3(wallsMesh.bounds.size.x, 1.0f, wallsMesh.bounds.size.z);
         //mazeFloor.transform.position = new Vector3(wallsMesh.bounds.center.x, -1.05f, wallsMesh.bounds.center.z);
 

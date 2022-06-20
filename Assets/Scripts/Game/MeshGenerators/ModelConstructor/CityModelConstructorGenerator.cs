@@ -17,10 +17,12 @@ namespace Assets.Scripts.Game.MeshGenerators.ModelConstructor
             meshAsset = Resources.Load<GameObject>("Prefabs/MeshAssets/CityMazeCells");
         }
 
-        public override (Mesh, Mesh) GenerateMesh(MazeDescription descr)
+        public override (List<Mesh>, List<Mesh>) GenerateMesh(MazeDescription descr)
         {
-            Mesh wallsMesh = new Mesh();
-            Mesh floorMesh = new Mesh();
+            List<Mesh> wallsMesh = new List<Mesh>();
+            List<Mesh> floorMesh = new List<Mesh>();
+            wallsMesh.Add(new Mesh());
+            floorMesh.Add(new Mesh());
             List<Vector3> vertices = new List<Vector3>();
             List<Vector2> uvs = new List<Vector2>();
             List<int> triangles = new List<int>();
@@ -50,7 +52,7 @@ namespace Assets.Scripts.Game.MeshGenerators.ModelConstructor
                     uvs.AddRange(cellMeshFilter.sharedMesh.uv);
                 }
 
-                GenerateFloorMesh(descr, floorMesh);
+                GenerateFloorMesh(descr, floorMesh[0]);
 
                 //Debug vertices indexes
                 //EnableVerticesIds(vertices);
@@ -65,11 +67,11 @@ namespace Assets.Scripts.Game.MeshGenerators.ModelConstructor
                 return (null, null);
             };
 
-            wallsMesh.vertices = vertices.ToArray();
-            wallsMesh.uv = uvs.ToArray();
-            wallsMesh.triangles = triangles.ToArray();
+            wallsMesh[0].vertices = vertices.ToArray();
+            wallsMesh[0].uv = uvs.ToArray();
+            wallsMesh[0].triangles = triangles.ToArray();
 
-            wallsMesh.RecalculateNormals();
+            wallsMesh[0].RecalculateNormals();
 
 
 
