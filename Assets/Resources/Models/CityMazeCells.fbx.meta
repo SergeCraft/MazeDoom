@@ -12,8 +12,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material.Cell01.02
-    second: {fileID: 2100000, guid: d4a282445754061468b3ac523704de05, type: 2}
+      name: Material.Cell01.006
+    second: {fileID: 2100000, guid: 743c6fb5856b6914c81868f8f5dda2af, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.HelperTexture
+    second: {fileID: 2100000, guid: d14a5990052992c439751b0e0aa7dc78, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

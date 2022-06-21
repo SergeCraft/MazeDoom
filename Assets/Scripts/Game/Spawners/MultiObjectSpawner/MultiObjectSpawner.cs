@@ -50,8 +50,16 @@ namespace Assets.Scripts.Game.Spawners.MultiObjectSpawner
             {
                 var cellGOPrefab = meshAsset.transform.GetChild((int)cell.Type - 1).gameObject;
                 var prefabName = cellGOPrefab.name;
-                if (prefabName == "Cell01.003") 
-                    prefabName = "Cell01.002";
+                prefabName =  prefabName switch
+                {
+                    "Cell01.003" => "Cell01.002",
+                    "Cell01.004" => "Cell01.002",
+                    "Cell01.005" => "Cell01.002",
+                    "Cell01.007" => "Cell01.006",
+                    "Cell01.008" => "Cell01.006",
+                    "Cell01.009" => "Cell01.006",
+                    _ => "HelperTexture"
+                };
                 var cellGO = GameObject.Instantiate(cellGOPrefab).gameObject;
                 cellGO.name = $"Cell_C{cell.ColumnPosition}_R{cell.RowPosition}";
                 cellGO.transform.SetParent(mazeWalls.transform);
