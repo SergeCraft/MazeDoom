@@ -48,16 +48,20 @@ namespace Assets.Scripts.Game.Spawners.MultiObjectSpawner
             mazeWalls.transform.SetParent(GameObject.Find("Mazes").transform);
             foreach (var cell in level.MazeDiescription.CellDescriptions)
             {
-                var cellGO = GameObject.Instantiate(meshAsset.transform.GetChild((int)cell.Type - 1)).gameObject;
+                var cellGOPrefab = meshAsset.transform.GetChild((int)cell.Type - 1).gameObject;
+                var prefabName = cellGOPrefab.name;
+                if (prefabName == "Cell01.003") 
+                    prefabName = "Cell01.002";
+                var cellGO = GameObject.Instantiate(cellGOPrefab).gameObject;
                 cellGO.name = $"Cell_C{cell.ColumnPosition}_R{cell.RowPosition}";
                 cellGO.transform.SetParent(mazeWalls.transform);
                 cellGO.transform.localScale = Vector3.one;
                 cellGO.transform.localRotation = Quaternion.Euler(Vector3.up);
                 cellGO.transform.localPosition = new Vector3((int)cell.ColumnPosition, 0, -(int)cell.RowPosition);
                 cellGO.AddComponent<MeshCollider>();
-                    var matName = $"Material.Cell01.{((int)cell.Type).ToString("D2")}";
-                    cellGO.GetComponent<MeshRenderer>().material = 
-                        materialsAsset.FirstOrDefault(m => m.name == matName);
+                var matName = $"Material.{prefabName}";
+                cellGO.GetComponent<MeshRenderer>().material = 
+                    materialsAsset.FirstOrDefault(m => m.name == matName);
             }
 
             GameObject mazeFloorPrefab = Resources.Load<GameObject>("Prefabs/CellComponents/MazeFloor");

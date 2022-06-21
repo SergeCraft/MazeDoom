@@ -7,6 +7,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Material.Cell01.002
+    second: {fileID: 2100000, guid: c1b0bd218959a344c915cad23d36410a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Material.Cell01.02
     second: {fileID: 2100000, guid: d4a282445754061468b3ac523704de05, type: 2}
   materials:

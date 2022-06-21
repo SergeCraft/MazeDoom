@@ -75,7 +75,7 @@ namespace Assets.Scripts.Game.Managers
         private void GenerateNewLevel()
         {
             var rdm = new System.Random();
-            var descr = MazeGenerators[rdm.Next(0, MazeGenerators.Count)].GenerateMaze(rdm.Next(10, 30), rdm.Next(10, 30));
+            var descr = MazeGenerators[rdm.Next(0, MazeGenerators.Count)].GenerateMaze(rdm.Next(10, 10), rdm.Next(10, 10));
             List<Mesh> wallsMesh = new List<Mesh>();
             List<Mesh> floorMesh = new List<Mesh>();
             (wallsMesh, floorMesh) = MeshGenerators[rdm.Next(0, MeshGenerators.Count)].GenerateMesh(descr);
