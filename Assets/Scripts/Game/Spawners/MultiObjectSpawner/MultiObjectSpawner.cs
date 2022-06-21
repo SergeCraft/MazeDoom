@@ -52,10 +52,12 @@ namespace Assets.Scripts.Game.Spawners.MultiObjectSpawner
                 var prefabName = cellGOPrefab.name;
                 prefabName =  prefabName switch
                 {
+                    "Cell01.002" => "Cell01.002",
                     "Cell01.003" => "Cell01.002",
                     "Cell01.004" => "Cell01.002",
                     "Cell01.005" => "Cell01.002",
                     "Cell01.007" => "Cell01.006",
+                    "Cell01.006" => "Cell01.006",
                     "Cell01.008" => "Cell01.006",
                     "Cell01.009" => "Cell01.006",
                     _ => "HelperTexture"
