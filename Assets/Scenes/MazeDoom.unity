@@ -1323,7 +1323,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   RotationModule:
-    enabled: 0
+    enabled: 1
     x:
       serializedVersion: 2
       minMaxState: 0
@@ -1433,7 +1433,7 @@ ParticleSystem:
     curve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.7853982
+      scalar: 6.283185
       minScalar: 0.7853982
       maxCurve:
         serializedVersion: 2
@@ -3681,7 +3681,7 @@ ParticleSystem:
     curve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.7853982
+      scalar: 6.283185
       minScalar: 0.7853982
       maxCurve:
         serializedVersion: 2
@@ -5381,8 +5381,10 @@ MonoBehaviour:
   useDFSMazeGenerator: 1
   useSergeCraftMazeGenerator: 0
   useModelConstructor: 0
-  useCityModelConstructor: 1
-  useStandardSpawner: 1
+  useCityModelConstructor: 0
+  useMultiobjectModelConstructor: 1
+  useStandardSpawner: 0
+  useMultiobjectSpawner: 1
   usePortal: 1
   useBallDefault: 1
   useBallTiltControlled: 0

@@ -12,12 +12,15 @@ namespace Assets.Scripts.Game.Spawners.MultiObjectSpawner
 {
     internal class MultiObjectSpawner : SpawnerBase
     {
-        public GameObject meshAsset;
+        public List<GameObject> cellsAsset = new List<GameObject>();
+        public List<GameObject> floorsAsset = new List<GameObject>();
         public List<Material> materialsAsset;
 
         public MultiObjectSpawner()
         {
-            meshAsset = Resources.Load<GameObject>("Prefabs/MeshAssets/CityMazeCells");
+            var meshAssetGO = Resources.Load<GameObject>("Prefabs/MeshAssets/CityMazeCells");
+            foreach (Transform child in meshAssetGO.transform) if (child.gameObject.name.StartsWith("Cell")) cellsAsset.Add(child.gameObject);
+            foreach (Transform child in meshAssetGO.transform) if (child.gameObject.name.StartsWith("Floor")) floorsAsset.Add(child.gameObject);
             materialsAsset = Resources.LoadAll<Material>("Materials/").ToList();
         }
 
@@ -48,37 +51,57 @@ namespace Assets.Scripts.Game.Spawners.MultiObjectSpawner
             mazeWalls.transform.SetParent(GameObject.Find("Mazes").transform);
             foreach (var cell in level.MazeDiescription.CellDescriptions)
             {
-                var cellGOPrefab = meshAsset.transform.GetChild((int)cell.Type - 1).gameObject;
+                var cellGOPrefab = cellsAsset[(int)cell.Type - 1];
                 var prefabName = cellGOPrefab.name;
                 prefabName =  prefabName switch
                 {
+                    "Cell01.001" => "Cell01.002",
                     "Cell01.002" => "Cell01.002",
                     "Cell01.003" => "Cell01.002",
                     "Cell01.004" => "Cell01.002",
                     "Cell01.005" => "Cell01.002",
-                    "Cell01.007" => "Cell01.006",
                     "Cell01.006" => "Cell01.006",
+                    "Cell01.007" => "Cell01.006",
                     "Cell01.008" => "Cell01.006",
                     "Cell01.009" => "Cell01.006",
+                    "Cell01.010" => "Cell01.010",
+                    "Cell01.011" => "Cell01.010",
+                    "Cell01.012" => "Cell01.010",
+                    "Cell01.013" => "Cell01.010",
+                    "Cell01.014" => "Cell01.014",
+                    "Cell01.015" => "Cell01.014",
                     _ => "HelperTexture"
                 };
                 var cellGO = GameObject.Instantiate(cellGOPrefab).gameObject;
                 cellGO.name = $"Cell_C{cell.ColumnPosition}_R{cell.RowPosition}";
                 cellGO.transform.SetParent(mazeWalls.transform);
                 cellGO.transform.localScale = Vector3.one;
-                cellGO.transform.localRotation = Quaternion.Euler(Vector3.up);
+                cellGO.transform.localRotation = Quaternion.Euler(Vector3.zero);
                 cellGO.transform.localPosition = new Vector3((int)cell.ColumnPosition, 0, -(int)cell.RowPosition);
                 cellGO.AddComponent<MeshCollider>();
+                //cellGO.GetComponent<MeshFilter>().sharedMesh.RecalculateNormals();
                 var matName = $"Material.{prefabName}";
                 cellGO.GetComponent<MeshRenderer>().material = 
                     materialsAsset.FirstOrDefault(m => m.name == matName);
+
+                var floorGOPrefab = floorsAsset.FirstOrDefault(f => f.name == cellGOPrefab.name.Replace("Cell", "Floor"));
+                var floorMatName = $"Material.{floorGOPrefab.name}";
+                var floorGO = GameObject.Instantiate(floorGOPrefab).gameObject;
+                floorGO.transform.SetParent(cellGO.transform);
+                floorGO.name = $"Floor_C{cell.ColumnPosition}_R{cell.RowPosition}";
+                floorGO.transform.localPosition = Vector3.zero;
+                floorGO.transform.localScale = Vector3.one;
+                floorGO.transform.localRotation = Quaternion.Euler(Vector3.zero);
+                floorGO.GetComponent<MeshRenderer>().material =
+                    materialsAsset.FirstOrDefault(m => m.name == floorMatName);
+
             }
 
             GameObject mazeFloorPrefab = Resources.Load<GameObject>("Prefabs/CellComponents/MazeFloor");
             var mazeFloor = GameObject.Instantiate(mazePrefab);
             mazeFloor.name = name + ".Floor";
             mazeFloor.transform.SetParent(mazeWalls.transform);
-            mazeFloor.GetComponent<MeshRenderer>().material.color = UnityEngine.Random.ColorHSV();
+            mazeFloor.GetComponent<MeshRenderer>().enabled = false;
             mazeFloor.GetComponent<MeshFilter>().sharedMesh = floorMesh[0];
             mazeFloor.GetComponent<MeshCollider>().sharedMesh = floorMesh[0];
 
